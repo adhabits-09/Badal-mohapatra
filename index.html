@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Badal Mohapatra — Learn • Grow • Earn</title>
+<meta name="theme-color" content="#f6f7ff">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* ============ EDIT HERE: colors ============ */
+  :root{
+    --bg:#f6f7ff; --card:#ffffff; --ink:#14132b; --muted:#5d5c7a;
+    --brand:#5b4cff; --brand2:#8a5cff; --wa:#25d366; --line:#e6e6f5;
+    --radius:18px; --shadow:0 10px 30px rgba(60,50,160,.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Poppins',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+  section{padding:70px 0}
+  h2{font-size:clamp(1.6rem,4vw,2.3rem);font-weight:800;text-align:center;margin-bottom:10px}
+  .sub{text-align:center;color:var(--muted);margin-bottom:40px}
+  .grad{background:linear-gradient(90deg,var(--brand),var(--brand2));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+  /* Buttons */
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;font-weight:600;border:none;cursor:pointer;font-family:inherit;font-size:1rem;transition:transform .15s,box-shadow .15s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn-wa{background:var(--wa);color:#fff;box-shadow:0 8px 20px rgba(37,211,102,.35)}
+  .btn-brand{background:linear-gradient(90deg,var(--brand),var(--brand2));color:#fff;box-shadow:0 8px 20px rgba(91,76,255,.3)}
+  .btn-ghost{background:#fff;border:2px solid var(--line);color:var(--ink)}
+
+  /* Welcome overlay */
+  #welcome{position:fixed;inset:0;background:rgba(20,19,43,.6);backdrop-filter:blur(6px);z-index:100;display:flex;align-items:center;justify-content:center;padding:20px}
+  #welcome .box{background:#fff;border-radius:24px;padding:36px 28px;max-width:400px;width:100%;text-align:center;position:relative;box-shadow:var(--shadow);animation:pop .35s ease}
+  #welcome .x{position:absolute;top:12px;right:16px;font-size:1.6rem;background:none;border:none;cursor:pointer;color:var(--muted)}
+  #welcome h3{font-size:1.6rem;margin-bottom:8px}
+  #welcome p{color:var(--muted);margin-bottom:22px}
+  @keyframes pop{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
+
+  /* Nav */
+  header{position:sticky;top:0;z-index:50;background:rgba(246,247,255,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .logo{font-weight:800;font-size:1.4rem}
+  .logo span{color:var(--brand)}
+  .links{display:flex;gap:26px;font-weight:500;color:var(--muted)}
+  .links a:hover{color:var(--brand)}
+  nav .btn{padding:10px 18px;font-size:.9rem}
+  @media(max-width:700px){.links{display:none}}
+
+  /* Offer */
+  .offer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+  .offer{background:var(--card);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow);border:1px solid var(--line)}
+  .offer .ic{font-size:2rem;margin-bottom:10px}
+  .offer h4{font-size:1.1rem;margin-bottom:6px}
+  .offer p{color:var(--muted);font-size:.95rem}
+
+  /* Media placeholder */
+  .ph{position:relative;border-radius:var(--radius);overflow:hidden;background:linear-gradient(135deg,#e7e4ff,#f3e9ff);display:flex;align-items:center;justify-content:center;color:var(--brand);font-weight:600;text-align:center;padding:10px}
+  .ph img,.ph video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+
+  /* Hero */
+  .hero{padding-top:40px}
+  .hero-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center}
+  @media(max-width:850px){.hero-grid{grid-template-columns:1fr}}
+  .tag{display:inline-block;background:#ece9ff;color:var(--brand);font-weight:600;padding:6px 14px;border-radius:999px;font-size:.85rem;margin-bottom:16px}
+  .hero h1{font-size:clamp(2rem,5.5vw,3.3rem);line-height:1.15;font-weight:800;margin-bottom:16px}
+  .hero p.lead{color:var(--muted);font-size:1.08rem;margin-bottom:26px}
+  .hero-ctas{display:flex;flex-wrap:wrap;gap:12px}
+  .hero-media{display:grid;grid-template-columns:1fr 1fr;gap:12px;position:relative}
+  .hero-media .ph.tall{aspect-ratio:3/4}
+  .vids{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px;grid-column:1/-1}
+  .vids .ph{aspect-ratio:9/16;font-size:.8rem}
+  .hero-media{grid-template-columns:1fr;max-width:440px;margin:0 auto;width:100%}
+  .hero-photo{aspect-ratio:4/5;padding:0;box-shadow:var(--shadow)}
+  .badge{position:absolute;bottom:-22px;left:50%;transform:translateX(-50%);background:linear-gradient(90deg,#efedff,#ffeaf0);border:1px solid #e3ddff;border-radius:999px;padding:12px 26px;font-weight:800;font-size:1.15rem;color:var(--ink);box-shadow:var(--shadow);white-space:nowrap;z-index:2}
+  .grad-pink{background:linear-gradient(90deg,#6d5cff,#e0559a);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .yt{position:relative;aspect-ratio:9/16;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);background:#000}
+  .yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .shot{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);background:#fff}
+  .shot img{width:100%;display:block}
+  .media-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,280px));justify-content:center;gap:18px;align-items:start}
+
+  /* Gallery */
+  .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+  .gallery figure{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+  .gallery .ph{aspect-ratio:4/3;border-radius:0}
+  .gallery figcaption{padding:14px 18px;font-weight:600}
+
+  /* Proofs */
+  .tabs{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-bottom:28px}
+  .tab{padding:10px 20px;border-radius:999px;border:2px solid var(--line);background:#fff;font-weight:600;cursor:pointer;font-family:inherit}
+  .tab.active{background:var(--brand);border-color:var(--brand);color:#fff}
+  .proof-panel{display:none;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+  .proof-panel.active{display:grid}
+  .proof-panel .ph{aspect-ratio:3/4}
+
+  /* Testimonials */
+  .tgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+  .tcard{background:#fff;border-radius:var(--radius);padding:26px;box-shadow:var(--shadow);border:1px solid var(--line)}
+  .tcard .q{font-size:2.5rem;line-height:1;color:var(--brand2)}
+  .tcard p{color:var(--muted);margin:8px 0 18px}
+  .who{display:flex;align-items:center;gap:12px}
+  .av{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700}
+  .who small{display:block;color:var(--muted)}
+  .fvids{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,280px));justify-content:center;gap:18px}
+  .fvids .ph{aspect-ratio:9/16}
+
+  /* FAQ */
+  .faq{max-width:760px;margin:0 auto}
+  details{background:#fff;border-radius:14px;padding:18px 22px;margin-bottom:12px;box-shadow:var(--shadow);border:1px solid var(--line)}
+  summary{font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between}
+  summary::after{content:'+';font-size:1.3rem;color:var(--brand)}
+  details[open] summary::after{content:'–'}
+  details p{color:var(--muted);margin-top:10px}
+
+  /* Final CTA */
+  .final{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;border-radius:28px;padding:50px 28px;text-align:center}
+  .final h2{color:#fff}
+  .final .sub{color:rgba(255,255,255,.85)}
+  .steps{display:flex;justify-content:center;gap:8px;margin-bottom:20px}
+  .dot{width:34px;height:6px;border-radius:6px;background:rgba(255,255,255,.35)}
+  .dot.on{background:#fff}
+  .form{max-width:420px;margin:0 auto 24px}
+  .fstep{display:none}
+  .fstep.active{display:block;animation:pop .3s ease}
+  .fstep label{display:block;font-weight:600;margin-bottom:10px;font-size:1.05rem}
+  .fstep input,.fstep select{width:100%;padding:15px 18px;border-radius:14px;border:none;font-family:inherit;font-size:1rem;margin-bottom:14px;outline:none}
+  .final .btn-ghost{background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.4)}
+  .final-ctas{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+  .note{margin-top:18px;font-size:.9rem;color:rgba(255,255,255,.85)}
+
+  footer{padding:36px 0;text-align:center;color:var(--muted);font-size:.9rem}
+  footer .links{justify-content:center;display:flex;margin-bottom:10px;flex-wrap:wrap}
+
+  .float-wa{position:fixed;right:18px;bottom:18px;z-index:60;width:58px;height:58px;border-radius:50%;background:var(--wa);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(37,211,102,.45);font-size:1.7rem}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     EDIT HERE: Badal ka WhatsApp aur phone number
+     (country code ke saath, bina + aur space ke, jaise 919876543210)
+     ============================================================ -->
+<script>
+  const WA_NUMBER = "919861969599";
+  const PHONE_NUMBER = "+919861969599";
+  const WA_TEXT = "Hi Badal, mujhe aapke workshop aur opportunity ke baare mein jaanna hai.";
+</script>
+
+<!-- Welcome overlay -->
+<div id="welcome">
+  <div class="box">
+    <button class="x" onclick="closeWelcome()" aria-label="Close">×</button>
+    <div style="font-size:2.6rem">👋</div>
+    <h3>Welcome!</h3>
+    <p>Details aur roadmap ke liye seedha WhatsApp pe message karo, ya × dabake page dekho.</p>
+    <a class="btn btn-wa wa-link" href="#">💬 Message on WhatsApp</a>
+  </div>
+</div>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <a href="#top" class="logo">Badal Mohapatra<span>.</span></a>
+      <div class="links">
+        <a href="#offer">Offer</a>
+        <a href="#photos">Photos</a>
+        <a href="#feedback">Feedback</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <a class="btn btn-wa wa-link" href="#">💬 Chat on WhatsApp</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="tag">🚀 Learn • Grow • Earn</span>
+        <h1>Badal ke saath seekho, <span class="grad">grow karo aur earn karo</span></h1>
+        <p class="lead">Zero se start karo, step-by-step training lo aur ek supportive community ke saath apni online earning ka safar shuru karo. Mentorship directly Badal se.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-wa wa-link" href="#">💬 WhatsApp pe Baat Karo</a>
+          <a class="btn btn-ghost" href="#join">Abhi Join Karo →</a>
+        </div>
+      </div>
+      <div class="hero-media">
+        <div class="badge">💰 Earned <span class="grad-pink">₹12,67,000+</span></div>
+        <div class="ph hero-photo"><img src="https://i.ibb.co/Kp4Fsg3k/badal.jpg" alt="Badal Mohapatra"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OFFER -->
+  <section id="offer">
+    <div class="wrap">
+      <h2>Aapko kya <span class="grad">milega?</span></h2>
+      <p class="sub">Join karne pe ye sab aapke liye</p>
+      <div class="offer-grid">
+        <div class="offer"><div class="ic">💰</div><h4>Up to ₹10,000 Cashback</h4><p>Shuruaat mein hi cashback benefit.</p></div>
+        <div class="offer"><div class="ic">🎓</div><h4>Workshop sirf ₹99 mein</h4><p>Poora concept aur roadmap ek workshop mein samjho.</p></div>
+        <div class="offer"><div class="ic">✈️</div><h4>Company Sponsored Trips</h4><p>Trips aur meetups, company ki taraf se.</p></div>
+        <div class="offer"><div class="ic">🤝</div><h4>Mentoring by Badal Mohapatra</h4><p>Har step pe direct guidance aur support.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHOTOS -->
+  <section id="photos">
+    <div class="wrap">
+      <h2>See the <span class="grad">Achievements & Memories</span></h2>
+      <p class="sub">Community ke saath bitaaye kuch khaas pal</p>
+      <div class="media-grid">
+        <div class="shot"><img src="https://i.ibb.co/vxcVKbB3/Whats-App-Image-2026-11-19-at-2-01-17-PM.jpg" alt="Achievement" loading="lazy"></div>
+        <div class="yt"><iframe src="https://www.youtube.com/embed/zzSFr3dCImc" title="Achievement video" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+        <div class="shot"><img src="https://i.ibb.co/YBDzxNWp/Whats-App-Image-2026-11-19-at-2-05-14-PM.jpg" alt="Achievement" loading="lazy"></div>
+        <div class="yt"><iframe src="https://www.youtube.com/embed/_doGTM7BLg4" title="Achievement video" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEEDBACK -->
+  <section id="feedback">
+    <div class="wrap">
+      <h2>Team <span class="grad">Feedback</span></h2>
+      <p class="sub">Hamari community kya kehti hai</p>
+      <div class="media-grid">
+        <div class="yt"><iframe src="https://www.youtube.com/embed/zzSFr3dCImc" title="Feedback video" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+        <div class="shot"><img src="https://i.ibb.co/vxcVKbB3/Whats-App-Image-2026-11-19-at-2-01-17-PM.jpg" alt="Feedback" loading="lazy"></div>
+        <div class="yt"><iframe src="https://www.youtube.com/embed/_doGTM7BLg4" title="Feedback video" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+        <div class="shot"><img src="https://i.ibb.co/YBDzxNWp/Whats-App-Image-2026-11-19-at-2-05-14-PM.jpg" alt="Feedback" loading="lazy"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="wrap">
+      <h2>Aksar Puche Jaane Wale <span class="grad">Sawaal</span></h2>
+      <p class="sub">Aapke doubts, hamare jawaab</p>
+      <div class="faq">
+        <details><summary>Kya koi experience chahiye?</summary><p>Bilkul nahi. Hum zero se start karte hain. Bas seekhne ki willingness chahiye.</p></details>
+        <details><summary>Training kaun dega?</summary><p>Training aur mentorship directly Badal aur unki experienced team degi.</p></details>
+        <details><summary>Income kab se start hogi?</summary><p>Ye aapki mehnat aur consistency pe depend karta hai. Training ke saath step-by-step roadmap milta hai.</p></details>
+        <details><summary>Shuru kaise karein?</summary><p>Neeche form bharo ya WhatsApp pe message karo. Team aapse contact karke saari details de degi.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section id="join">
+    <div class="wrap">
+      <div class="final">
+        <h2>Ready to Transform Your Life? 🚀</h2>
+        <p class="sub">400+ log already apne safar pe nikal chuke hain. Ab aapki baari.</p>
+        <div class="steps"><div class="dot on"></div><div class="dot"></div><div class="dot"></div></div>
+        <div class="form">
+          <div class="fstep active" data-s="0">
+            <label>Aapka naam kya hai?</label>
+            <input id="f-name" type="text" placeholder="Apna naam likho">
+            <button class="btn btn-wa" style="width:100%;justify-content:center" onclick="next(0)">Next →</button>
+          </div>
+          <div class="fstep" data-s="1">
+            <label>Aapki age?</label>
+            <input id="f-age" type="number" placeholder="Jaise 24" min="15" max="80">
+            <button class="btn btn-wa" style="width:100%;justify-content:center" onclick="next(1)">Next →</button>
+          </div>
+          <div class="fstep" data-s="2">
+            <label>Aap kya karte ho?</label>
+            <select id="f-prof">
+              <option value="">Select karo</option>
+              <option>Student</option>
+              <option>Job / Working Professional</option>
+              <option>Business</option>
+              <option>Housewife</option>
+              <option>Other</option>
+            </select>
+            <button class="btn btn-wa" style="width:100%;justify-content:center" onclick="submitForm()">💬 Submit on WhatsApp</button>
+          </div>
+        </div>
+        <div class="final-ctas">
+          <a class="btn btn-ghost" id="call-btn" href="#">📞 Call Now</a>
+          <a class="btn btn-wa wa-link" href="#">💬 Chat on WhatsApp</a>
+        </div>
+        <p class="note">⏱️ 24 ghante ke andar aapko poori details aur roadmap mil jaayega.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="links"><a href="#offer">Offer</a><a href="#photos">Photos</a><a href="#feedback">Feedback</a><a href="#faq">FAQ</a></div>
+    © <span id="yr"></span> Badal Mohapatra. All rights reserved.
+  </div>
+</footer>
+
+<a class="float-wa wa-link" href="#" aria-label="WhatsApp">💬</a>
+
+<script>
+  const waUrl = t => `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(t)}`;
+  document.querySelectorAll('.wa-link').forEach(a => { a.href = waUrl(WA_TEXT); a.target = "_blank"; a.rel = "noopener"; });
+  document.getElementById('call-btn').href = 'tel:' + PHONE_NUMBER;
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  function closeWelcome(){ document.getElementById('welcome').style.display = 'none'; }
+  document.getElementById('welcome').addEventListener('click', e => { if (e.target.id === 'welcome') closeWelcome(); });
+
+  // 3-step form
+  const ids = ['f-name','f-age','f-prof'];
+  function show(i){
+    document.querySelectorAll('.fstep').forEach(s => s.classList.toggle('active', +s.dataset.s === i));
+    document.querySelectorAll('.dot').forEach((d,k) => d.classList.toggle('on', k <= i));
+  }
+  function next(i){
+    const el = document.getElementById(ids[i]);
+    if (!el.value.trim()) { el.focus(); el.style.outline = '3px solid #ffd2d2'; return; }
+    el.style.outline = 'none'; show(i + 1);
+    setTimeout(() => document.getElementById(ids[i+1]).focus(), 50);
+  }
+  function submitForm(){
+    const p = document.getElementById('f-prof');
+    if (!p.value) { p.focus(); p.style.outline = '3px solid #ffd2d2'; return; }
+    const msg = `Hi Badal, main join karna chahta/chahti hoon.\n\nNaam: ${document.getElementById('f-name').value}\nAge: ${document.getElementById('f-age').value}\nProfession: ${p.value}`;
+    window.open(waUrl(msg), '_blank');
+  }
+</script>
+</body>
+</html>
